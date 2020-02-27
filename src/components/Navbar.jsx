@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navbar, Form, Nav, FormControl } from "react-bootstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 class Navbars extends Component {
   state = {};
   render() {
@@ -41,4 +42,8 @@ const NavWrapper = styled.div`
   font-family: "Poppins";
 `;
 
+Navbars.propTypes = {
+  name: PropTypes.string,
+  arr: PropTypes.array
+};
 export default Navbars;

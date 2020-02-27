@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import styled from "styled-components";
 
 class NowPlaying extends Component {
   constructor(props) {
@@ -29,14 +33,21 @@ class NowPlaying extends Component {
     if (this.state.loading) {
       return <Spinner animation="border" />;
     }
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1
+    };
     return (
-      <>
+      <SliderWrapper>
         <Container>
           <h1 className="my-5">Now Playing </h1>
-          <Row>
+          <Slider {...settings}>
             {this.state.nowPlaying.map(movie => {
               return (
-                <Col key={movie.id} md="3">
+                <Col key={movie.id} md="12">
                   <Link to={`/movies/${movie.id}`}>
                     <Card>
                       <Card.Img
@@ -51,11 +62,20 @@ class NowPlaying extends Component {
                 </Col>
               );
             })}
-          </Row>
+          </Slider>
         </Container>
-      </>
+      </SliderWrapper>
     );
   }
 }
+
+const SliderWrapper = styled.div`
+  .slick-arrow {
+    background-color: blue;
+    width: 36px;
+    height: 36px;
+    border-radius: 100px;
+  }
+`;
 
 export default NowPlaying;
