@@ -2,29 +2,25 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
 
-class NowPlaying extends Component {
+class PopularMovies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nowPlaying: [],
+      PopularMovies: [],
       loading: true
     };
   }
   componentDidMount() {
-    this.getNowPlayingMovies();
+    this.getPopularMovies();
   }
-  getNowPlayingMovies = async () => {
+  getPopularMovies = async () => {
     try {
       let key = "97a8eb0351c05d0a6dcc4a6396836eea";
       let res = await Axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=97a8eb0351c05d0a6dcc4a6396836eea&language=en-US&page=1`
       );
-      this.setState({ nowPlaying: res.data.results, loading: false });
+      this.setState({ PopularMovies: res.data.results, loading: false });
     } catch (error) {
       console.log(error);
     }
@@ -33,21 +29,14 @@ class NowPlaying extends Component {
     if (this.state.loading) {
       return <Spinner animation="border" />;
     }
-    var settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1
-    };
     return (
-      <SliderWrapper>
+      <>
         <Container>
-          <h1 className="my-5">Now Playing </h1>
-          <Slider {...settings}>
-            {this.state.nowPlaying.map(movie => {
+          <h1 className="my-5">PopularMovies </h1>
+          <Row>
+            {this.state.PopularMovies.map(movie => {
               return (
-                <Col key={movie.id} md="12">
+                <Col key={movie.id} md="4">
                   <Link to={`/movies/${movie.id}`}>
                     <Card>
                       <Card.Img
@@ -62,20 +51,11 @@ class NowPlaying extends Component {
                 </Col>
               );
             })}
-          </Slider>
+          </Row>
         </Container>
-      </SliderWrapper>
+      </>
     );
   }
 }
 
-const SliderWrapper = styled.div`
-  .slick-arrow {
-    background-color: blue;
-    width: 36px;
-    height: 36px;
-    border-radius: 100px;
-  }
-`;
-
-export default NowPlaying;
+export default PopularMovies;

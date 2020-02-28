@@ -18,8 +18,9 @@ class SingleMoviesPage extends Component {
     if (this.state.loading) {
       return <Spinner animation="border" />;
     }
+    const { movie } = this.state;
     return (
-      <Container>
+      <Container className="mt-5">
         <Row>
           <Col md="6">
             <img
@@ -27,7 +28,18 @@ class SingleMoviesPage extends Component {
               alt=""
             />
           </Col>
-          <Col md="6"></Col>
+          <Col md="6">
+            <h2>{movie.title}</h2>
+            <ul>
+              <li>original_language:{movie.original_language}</li>
+              <li>popularity:{movie.popularity}</li>
+              <li>release_date:{movie.release_date}</li>
+            </ul>
+            <p>{movie.overview}</p>
+            {movie.genres.map(el => {
+              return <li key={el.id}>{el.name}</li>;
+            })}
+          </Col>
         </Row>
       </Container>
     );
