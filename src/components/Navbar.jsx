@@ -9,27 +9,32 @@ class Navbars extends Component {
     return (
       <NavWrapper>
         <Navbar expand="lg">
-          <Navbar.Brand href="#home">Movies Ticket</Navbar.Brand>
+          <Navbar.Brand href="/">Movies Ticket</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Link to="/" className="nav-link">
                 Home
               </Link>
-              <Link to="/about" className="nav-link">
-                About
-              </Link>
               <Link to="/popularmovie" className="nav-link">
                 Popular Movies
               </Link>
+              <Link to="/comingsoon" className="nav-link ">
+                Coming Soon
+              </Link>
+              <Link to="/about" className="nav-link">
+                About
+              </Link>
             </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-            </Form>
+            <SearchBarWrapper>
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                />
+              </Form>
+            </SearchBarWrapper>
           </Navbar.Collapse>
         </Navbar>
       </NavWrapper>
@@ -40,6 +45,12 @@ class Navbars extends Component {
 const NavWrapper = styled.div`
   background-color: rgb(253, 183, 59);
   font-family: "Poppins";
+`;
+
+const SearchBarWrapper = styled.div`
+  .form-inline .form-control {
+    border-radius: 100px;
+  }
 `;
 
 Navbars.propTypes = {

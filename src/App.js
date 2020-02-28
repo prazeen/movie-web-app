@@ -9,35 +9,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SingleMoviesPage from "./components/singleMovie-page";
 import PopularMovies from "./components/home-page/components/PopularMovies";
 import UnControlComponent from "./routing/UncontrollConponent";
+import ComingSoon from "./components/coming-soon/components/ComingSoon";
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      count: 0
-    };
-    this.handleIncrement = this.handleIncrement.bind(this);
+    this.state = {};
   }
-  handleIncrement() {
-    console.log("called");
-    console.log(this);
-    this.setState({ count: this.state.count + 1 });
-  }
+
   render() {
     return (
       <React.Fragment>
         <Navbar name="hdhdhdh" arr={[]}>
           Hello
         </Navbar>
-        <h1 onClick={this.handleIncrement}>
-          Your counter is :{this.state.count}
-        </h1>
+
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/movies/:id" component={SingleMoviesPage} />
           <Route path="/popularmovie" component={PopularMovies} />
+          <Route path="/about" component={AboutPage} />
+
           {/* <Route path="/Services" exact component={ServicesPage} />
           <Route path="/Products" component={ProductsPage} /> */}
           <Route path="/uncontroll" component={UnControlComponent} />
+          <Route path="/comingsoon" component={ComingSoon} />
         </Switch>
       </React.Fragment>
     );

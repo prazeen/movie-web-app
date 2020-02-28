@@ -3,6 +3,9 @@ import { Row, Container, Col, Card, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 class PopularMovies extends Component {
   constructor(props) {
     super(props);
@@ -26,34 +29,37 @@ class PopularMovies extends Component {
     }
   };
   render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
     return (
-      <>
-        <Container>
-          <Wrapper>
-            <h1 className="my-5">Popular Movies</h1>
-          </Wrapper>
+      <Container>
+        <h1 className="my-5">Popular Movies</h1>
 
-          <Row>
-            {this.state.popularMovies.map(movie => {
-              return (
-                <Col md="3">
-                  <Link to={`/movies/${movie.id}`}>
-                    <Card>
-                      <Card.Img
-                        variant="top"
-                        src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                      />
-                      <Card.Body>
-                        <Card.Title>{movie.Title}</Card.Title>
-                      </Card.Body>
-                    </Card>
-                  </Link>
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
-      </>
+        <Slider {...settings}>
+          {this.state.popularMovies.map(movie => {
+            return (
+              <Col key={movie.id} md="12">
+                <Link to={`/movies/${movie.id}`}>
+                  <Card>
+                    <Card.Img
+                      variant="top"
+                      src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                    />
+                    <Card.Body>
+                      <Card.Title>{movie.Title}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Col>
+            );
+          })}
+        </Slider>
+      </Container>
     );
   }
 }
